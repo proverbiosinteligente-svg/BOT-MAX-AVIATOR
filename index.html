@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bot MAX - Aviator (Cliente)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="notification" id="notification"></div>
+  <div class="container">
+    <div class="header">
+      <h1>🤖 BOT MAX AVIATOR</h1>
+      <p>Recebendo dados reais via WebSocket (servidor Puppeteer)</p>
+    </div>
+    <div class="card">
+      <div class="status-section">
+        <span>Status do Bot:</span>
+        <span class="status-badge status-aguardando" id="statusText">AGUARDANDO</span>
+      </div>
+      <div class="connection-status">
+        <div style="display:flex; align-items:center;">
+          <div class="connection-dot disconnected" id="connectionDot"></div>
+          <span id="connectionText">DESCONECTADO</span>
+        </div>
+        <button class="btn btn-warning" id="connectBtn" style="padding:8px 15px; font-size:12px;">🔗 CONECTAR</button>
+      </div>
+      <div class="prediction-display">
+        <div class="prediction-label">PRÓXIMA PREVISÃO</div>
+        <div class="prediction-value prediction-medium" id="predictionText">???</div>
+        <div class="confidence" id="confidenceText">Confiança: ???</div>
+      </div>
+      <div class="button-group">
+        <button class="btn btn-primary" id="startBtn">🎯 INICIAR BOT</button>
+        <button class="btn btn-danger" id="stopBtn">⏹️ PARAR</button>
+      </div>
+      <div class="loading" id="loading">
+        <div class="spinner" aria-hidden="true"></div>
+        <div>Analisando dados...</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>📊 ESTATÍSTICAS</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value" id="totalPredictions">0</div>
+          <div class="stat-label">TOTAL</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="accuracyRate">0%</div>
+          <div class="stat-label">PRECISÃO</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="successRate">0%</div>
+          <div class="stat-label">ACERTOS</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>📈 HISTÓRICO</h3>
+      <div class="history-section" id="historyContainer"></div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

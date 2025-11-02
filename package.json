@@ -1,0 +1,13 @@
+{
+  "name": "botmax-aviator-elephantbet",
+  "version": "1.0.0",
+  "description": "Puppeteer + WebSocket server that extracts Aviator multipliers from ElephantBet and broadcasts to clients",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.13.0",
+    "puppeteer": "^21.3.8"
+  }
+}
