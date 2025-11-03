@@ -1,7 +1,7 @@
 {
   "name": "botmax-aviator-elephantbet",
   "version": "1.0.0",
-  "description": "Servidor WebSocket do BOT MAX AVIATOR coleta e transmite previsões de multiplicadores do Aviator da ElephantBet em tempo real",
+  "description": "Servidor WebSocket do BOT MAX AVIATOR coleta e transmite previsões de multiplicadores do Aviator da ElephantBet.co.ao em tempo real",
   "main": "servidor.js",
   "type": "module",
   "scripts": {
