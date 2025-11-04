@@ -19,7 +19,7 @@ let history = [];
 let total = 0;
 
 // ⚡️ Altere este endereço depois de subir no Render:
-const WS_URL = "wss://teu-nome-do-render.onrender.com";
+const WS_URL = "wss://BOT-MAX-AVIATOR-render.onrender.com";
 
 connectBtn.addEventListener('click', () => {
   socket = new WebSocket(WS_URL);
