@@ -1,35 +1,49 @@
-# Bot MAX - Integração Real com ElephantBet (Aviator)
+Bot MAX - ElephantBet Puppeteer WebSocket Server
+================================================
 
-**Conteúdo do pacote**
-- `index.html`, `styles.css`, `app.js` — painel cliente que recebe dados via WebSocket.
-- `server.js` — servidor Node.js que usa Puppeteer para abrir a página da ElephantBet e extrair dados em tempo real (via WebSocket frames ou polling DOM).
-- `package.json` — dependências (puppeteer, ws).
-- `android/MainActivity.java` — exemplo de como usar WebView para carregar o jogo no app Android.
+Objetivo
+--------
+Este servidor abre a página do Aviator na ElephantBet usando Puppeteer, captura frames de WebSocket
+(via CDP) e faz polling do DOM como fallback. Em seguida, transmite objetos JSON com o multiplicador
+via WebSocket para clientes (seu painel no GitHub Pages ou app WebView).
 
-## Observações importantes (leia antes de rodar)
-1. **Legalidade & Termos de Uso**: Automatizar leitura de dados de um site de terceiros pode violate the site's Terms of Use. Verifique permissões e políticas da ElephantBet before using in production.
-2. **Bloqueios e Proteções**: Sites de cassino frequentemente usam obfuscação, WebSockets proprietários ou proteção anti-bot. O script aqui usa técnicas gerais (captura de frames WebSocket via CDP e polling do DOM) — pode ser necessário adaptar seletores ou lógica para o site específico.
-3. **Requerimentos**:
-   - Node.js 18+ (recomendado)
-   - Conexão de internet
-   - Permissões para executar Puppeteer (download de Chromium pode ocorrer na primeira execução)
-4. **Uso**:
-   - Instale dependências: `npm install`
-   - Rode: `TARGET_URL="https://www.elephantbet.co.ao/pt/casino/game-view/806666/aviator" node server.js`
-   - Abra `index.html` no navegador (ou hospede) e, ao clicar em "CONECTAR", informe o endereço do WebSocket: `ws://<servidor>:8080`
+Arquivos
+--------
+- servidor.js  -> código principal (Puppeteer + WebSocket)
+- package.json -> dependências e script start
+- README.md    -> este arquivo
 
-## Android WebView
-O arquivo `android/MainActivity.java` contem um exemplo simples que carrega:
-```
-https://www.elephantbet.co.ao/pt/casino/game-view/806666/aviator
-```
-dentro de uma `WebView`. Para usar, crie um projeto Android e substitua a Activity.
+Como rodar localmente (teste)
+----------------------------
+1. Clone este repositório no seu servidor ou máquina local.
+2. Instale dependências:
+   ```bash
+   npm install
+   ```
+3. Rode:
+   ```bash
+   TARGET_URL="https://www.elephantbet.co.ao/pt/casino/game-view/806666/aviator" node servidor.js
+   ```
+4. O servidor irá expor um endpoint HTTP e um WebSocket na porta padrão (8080) ou PORT env var.
+   Exemplo de cliente WebSocket: ws://<IP-do-servidor>:8080
 
-## Segurança
-- Em produção, use `wss://` e autenticação entre servidor e clientes.
-- Não exponha o servidor sem proteção.
+Deploy no Render.com
+--------------------
+1. Conecta teu repositório no Render (New -> Web Service). Autoriza o GitHub se necessário.
+2. Configure:
+   - Build Command: `npm install`
+   - Start Command: `node servidor.js`
+3. Em variáveis de ambiente (opcional) defina `TARGET_URL` se quiser alterar a URL alvo.
+4. Escolha um plano que permita execução de Puppeteer (instâncias gratuitas podem não suportar devido a sandbox).
 
-## Ajustes possíveis
-- Melhorar parsing de WebSocket frames para o protocolo específico.
-- Capturar eventos via CDP mais precisos (Network.webSocketFrameReceived já é usado).
-- Executar Puppeteer em modo não-headless with devtools for debugging.
+Observações importantes
+-----------------------
+- Rodar Puppeteer em ambientes gerenciados pode exigir instalação de bibliotecas do sistema e mais memória.
+- O código tenta capturar frames WebSocket; dependendo do site, o protocolo pode ser ofuscado e será necessário ajustar
+  as heurísticas de parsing (seletores DOM ou decodificação de frames).
+- Verifique os Termos de Uso da ElephantBet antes de usar em produção. Automação de leitura pode violar políticas.
+
+Segurança
+---------
+- Em produção, proteja o acesso ao WebSocket (autenticação e TLS).
+- Rode atrás de firewall e use medidas de proteção (fail2ban, etc.).
