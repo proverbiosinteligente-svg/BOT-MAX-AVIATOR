@@ -14,12 +14,12 @@ const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const loading = document.getElementById('loading');
 
-let running = false;
+let running = true;
 let history = [];
 let total = 0;
 
 // ⚡️ Altere este endereço depois de subir no Render:
-const WS_URL = "wss://bot-max-aviator.onrender.com";
+const WS_URL = "ws://127.0.0.1:8080";
 
 connectBtn.addEventListener('click', () => {
   socket = new WebSocket(WS_URL);
