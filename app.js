@@ -19,7 +19,7 @@ let history = [];
 let total = 0;
 
 // ⚡️ Altere este endereço depois de subir no Render:
-const WS_URL = "ws://127.0.0.1:4041";
+const WS_URL = "ws://127.0.0.1:4040";
 
 connectBtn.addEventListener('click', () => {
   socket = new WebSocket(WS_URL);
