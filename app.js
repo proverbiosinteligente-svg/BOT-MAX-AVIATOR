@@ -19,7 +19,7 @@ let history = [];
 let total = 0;
 
 // ⚡️ Altere este endereço depois de subir no Render:
-const WS_URL = "ws://127.0.0.1:8080";
+const WS_URL = "ws://127.0.0.1:4041.ngrok.io";
 
 connectBtn.addEventListener('click', () => {
   socket = new WebSocket(WS_URL);
@@ -37,7 +37,7 @@ connectBtn.addEventListener('click', () => {
     if (!running) return;
 
     const multiplier = data.multiplier?.toFixed(2) || '---';
-    const confidence = Math.round((Math.random() * 20 + 70)); // simulação de confiança
+    const confidence = Math.round((Math.random() * 20 + 70)); // mostrar confiança
 
     predictionText.textContent = `${multiplier}x`;
     confidenceText.textContent = `Confiança: ${confidence}%`;
